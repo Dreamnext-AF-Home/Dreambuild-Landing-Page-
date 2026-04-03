@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { galleryItems } from "@/lib/landing-data";
+import { FadeUp, StaggerContainer, StaggerItem, motion } from "@/components/ui/motion";
 
 const toneStyles = {
   dark: "bg-gradient-to-br from-[#3a3a3a] via-[#4a4a4a] to-[#2a2a2a]",
@@ -13,7 +16,7 @@ export function GallerySection() {
     <section id="gallery" className="bg-white py-20 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <FadeUp className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-xs font-medium tracking-widest text-[var(--muted)] uppercase">
               Interior Gallery
@@ -24,37 +27,40 @@ export function GallerySection() {
           </div>
           <Link
             href="/projects"
-            className="inline-flex w-fit items-center justify-center rounded-full border border-[var(--border)] bg-white px-6 py-3 text-sm font-medium text-[var(--foreground)] transition-all hover:border-[var(--foreground)]"
+            className="inline-flex w-fit items-center justify-center rounded-full border border-[var(--border)] bg-white px-6 py-3 text-sm font-medium text-[var(--foreground)] transition-all hover:border-[var(--foreground)] hover:scale-105"
           >
             See All Projects
           </Link>
-        </div>
+        </FadeUp>
 
         {/* Gallery Grid */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3" staggerDelay={0.1}>
           {galleryItems.map((item, index) => (
-            <Link
-              key={item.title}
-              href="/projects"
-              className="group relative overflow-hidden rounded-2xl"
-            >
-              <div
-                className={`${toneStyles[item.tone as keyof typeof toneStyles]} transition-transform duration-500 group-hover:scale-105 ${
-                  index % 3 === 0 ? "aspect-[4/5]" : "aspect-[4/4]"
-                }`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="absolute inset-x-0 bottom-0 translate-y-full p-6 transition-transform duration-300 group-hover:translate-y-0">
-                <p className="text-xs font-medium tracking-widest text-white/70 uppercase">
-                  Gallery
-                </p>
-                <h3 className="mt-1 text-lg font-medium text-white">
-                  {item.title}
-                </h3>
-              </div>
-            </Link>
+            <StaggerItem key={item.title}>
+              <Link
+                href="/projects"
+                className="group relative overflow-hidden rounded-2xl block"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                  className={`${toneStyles[item.tone as keyof typeof toneStyles]} ${
+                    index % 3 === 0 ? "aspect-[4/5]" : "aspect-[4/4]"
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-x-0 bottom-0 translate-y-full p-6 transition-transform duration-300 group-hover:translate-y-0">
+                  <p className="text-xs font-medium tracking-widest text-white/70 uppercase">
+                    Gallery
+                  </p>
+                  <h3 className="mt-1 text-lg font-medium text-white">
+                    {item.title}
+                  </h3>
+                </div>
+              </Link>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

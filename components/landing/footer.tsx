@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,9 +10,9 @@ export function Footer() {
   return (
     <footer className="border-t border-[var(--border)] bg-white">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-4 lg:gap-8">
+        <StaggerContainer className="grid gap-10 lg:grid-cols-4 lg:gap-8" staggerDelay={0.1}>
           {/* Brand Column */}
-          <div className="lg:col-span-2">
+          <StaggerItem className="lg:col-span-2">
             <Image
               src="/Images/DreambuildBanner.jpg"
               alt="Dreambuild Design Studio"
@@ -21,10 +24,10 @@ export function Footer() {
               Interior design studio crafting modern residential spaces with 
               refined finishes and a distinctive design identity.
             </p>
-          </div>
+          </StaggerItem>
 
           {/* Navigation Column */}
-          <div>
+          <StaggerItem>
             <p className="text-xs font-medium tracking-widest text-[var(--foreground)] uppercase">
               Navigation
             </p>
@@ -54,10 +57,10 @@ export function Footer() {
                 Blogs
               </Link>
             </nav>
-          </div>
+          </StaggerItem>
 
           {/* Contact Column */}
-          <div>
+          <StaggerItem>
             <p className="text-xs font-medium tracking-widest text-[var(--foreground)] uppercase">
               Contact
             </p>
@@ -72,11 +75,11 @@ export function Footer() {
                 Book a Consultation
               </Link>
             </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
 
         {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 lg:flex-row">
+        <FadeUp delay={0.3} className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 lg:flex-row">
           <p className="text-sm text-[var(--muted)]">
             {currentYear} Dreambuild Design Studio. All rights reserved.
           </p>
@@ -94,7 +97,7 @@ export function Footer() {
               Terms of Service
             </Link>
           </div>
-        </div>
+        </FadeUp>
       </div>
     </footer>
   );
