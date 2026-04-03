@@ -2,39 +2,55 @@ import { testimonials } from "@/lib/landing-data";
 
 export function TestimonialsSection() {
   return (
-    <section className="px-6 py-[4.5rem] sm:px-10 lg:px-14 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-10 text-center">
-          <p className="text-[0.72rem] font-medium tracking-[0.32em] text-stone-500 uppercase">
+    <section className="bg-white py-20 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-medium tracking-widest text-[var(--muted)] uppercase">
             Client Testimonials
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-stone-950 sm:text-4xl lg:text-5xl">
-            Proof that the calm luxury direction lands well in real homes.
+          <h2 className="mt-4 text-3xl font-medium tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
+            What our clients say about working with us
           </h2>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-2">
+        {/* Testimonials Grid */}
+        <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-2">
           {testimonials.map((item, index) => (
             <article
               key={item.name}
-              className="rounded-[1.9rem] border border-stone-200/80 bg-white/82 p-6 shadow-[0_24px_70px_rgba(65,41,25,0.06)]"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-8 lg:p-10"
             >
-              <div className="flex items-center gap-4">
+              {/* Quote Icon */}
+              <svg
+                className="h-8 w-8 text-[var(--accent)]"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+
+              {/* Quote */}
+              <p className="mt-6 text-lg leading-relaxed text-[var(--foreground)]">
+                {item.quote}
+              </p>
+
+              {/* Author */}
+              <div className="mt-8 flex items-center gap-4">
                 <div
-                  className={`h-14 w-14 rounded-2xl ${
+                  className={`h-12 w-12 rounded-full ${
                     index === 0
-                      ? "bg-[linear-gradient(160deg,#c2a893,#f3e9de)]"
-                      : "bg-[linear-gradient(160deg,#967967,#d9c3b4)]"
+                      ? "bg-gradient-to-br from-[#d4c8b8] to-[#e8e0d4]"
+                      : "bg-gradient-to-br from-[#c0b0a0] to-[#d8cec0]"
                   }`}
                 />
                 <div>
-                  <h3 className="font-semibold text-stone-950">{item.name}</h3>
-                  <p className="text-sm text-stone-500">{item.role}</p>
+                  <p className="font-medium text-[var(--foreground)]">
+                    {item.name}
+                  </p>
+                  <p className="text-sm text-[var(--muted)]">{item.role}</p>
                 </div>
               </div>
-              <p className="mt-6 text-base leading-8 text-stone-700">
-                &ldquo;{item.quote}&rdquo;
-              </p>
             </article>
           ))}
         </div>

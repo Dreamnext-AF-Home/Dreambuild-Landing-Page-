@@ -2,57 +2,72 @@ import Link from "next/link";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="px-6 pt-10 pb-20 sm:px-10 lg:px-14 lg:pb-24">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2.2rem] border border-yellow-200 bg-[linear-gradient(135deg,#fffef7_0%,#fff3a6_40%,#ffffff_100%)] shadow-[0_30px_90px_rgba(18,18,18,0.07)]">
-        <div className="grid gap-8 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1fr_0.9fr] lg:px-10 lg:py-12">
-          <div className="max-w-2xl">
-            <p className="text-[0.72rem] font-medium tracking-[0.32em] text-stone-500 uppercase">
-              Start Your Project
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-black sm:text-4xl lg:text-5xl">
-              A landing page that feels premium and now matches the Dreambuild brand.
-            </h2>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-stone-700 sm:text-base">
-              The layout now carries the same yellow and charcoal identity as
-              your banner while keeping the interior-design feel clean and modern.
-            </p>
+    <section id="contact" className="py-20 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--accent-soft)]">
+          <div className="grid gap-0 lg:grid-cols-2">
+            {/* Left Column - Content */}
+            <div className="flex flex-col justify-center px-8 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+              <p className="text-xs font-medium tracking-widest text-[var(--muted)] uppercase">
+                Start Your Project
+              </p>
+              <h2 className="mt-4 text-3xl font-medium tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
+                Ready to transform your space?
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-[var(--muted)]">
+                Let&apos;s discuss your vision and create a home that reflects your 
+                style, needs, and aspirations.
+              </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="#"
-                className="inline-flex items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[var(--brand-deep)]"
-              >
-                Book a Consultation
-              </Link>
-              <Link
-                href="/projects"
-                className="inline-flex items-center justify-center rounded-full border border-black/15 bg-white/80 px-6 py-3 text-sm font-medium text-black transition hover:bg-white"
-              >
-                Browse Portfolio
-              </Link>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="#"
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--dark)] px-6 py-3.5 text-sm font-medium text-white transition-all hover:bg-[var(--dark-muted)]"
+                >
+                  Book a Consultation
+                </Link>
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center justify-center rounded-full border border-[var(--border)] bg-white px-6 py-3.5 text-sm font-medium text-[var(--foreground)] transition-all hover:border-[var(--foreground)]"
+                >
+                  Browse Portfolio
+                </Link>
+              </div>
             </div>
-          </div>
 
-          <div className="rounded-[1.8rem] bg-black p-6 text-white">
-            <p className="text-[0.72rem] font-medium tracking-[0.32em] text-yellow-300 uppercase">
-              Studio Notes
-            </p>
-            <div className="mt-5 space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-                <p className="text-sm text-stone-400">Email</p>
-                <p className="mt-1 text-base font-medium">hello@dreambuild.studio</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-                <p className="text-sm text-stone-400">Specialty</p>
-                <p className="mt-1 text-base font-medium">
-                  Modern residential interiors with stronger brand character
-                </p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-                <p className="text-sm text-stone-400">Deliverables</p>
-                <p className="mt-1 text-base font-medium">
-                  Concepts, selections, layout, projects, and interior content
-                </p>
+            {/* Right Column - Contact Info */}
+            <div className="bg-[var(--dark)] px-8 py-12 text-white sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+              <p className="text-xs font-medium tracking-widest text-[var(--accent)] uppercase">
+                Get in Touch
+              </p>
+
+              <div className="mt-8 space-y-6">
+                <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                  <p className="text-xs font-medium tracking-widest text-neutral-500 uppercase">
+                    Email
+                  </p>
+                  <p className="mt-2 text-base font-medium">
+                    hello@dreambuild.studio
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                  <p className="text-xs font-medium tracking-widest text-neutral-500 uppercase">
+                    Specialty
+                  </p>
+                  <p className="mt-2 text-base font-medium">
+                    Modern residential interiors with refined character
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                  <p className="text-xs font-medium tracking-widest text-neutral-500 uppercase">
+                    Deliverables
+                  </p>
+                  <p className="mt-2 text-base font-medium">
+                    Concepts, selections, layouts, and presentation-ready designs
+                  </p>
+                </div>
               </div>
             </div>
           </div>

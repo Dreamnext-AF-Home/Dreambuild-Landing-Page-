@@ -1,83 +1,135 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { navigation, stats } from "@/lib/landing-data";
+import { useState } from "react";
 
 export function HeroSection() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <section className="relative isolate overflow-hidden px-6 pt-6 pb-[4.5rem] sm:px-10 lg:px-14 lg:pt-8 lg:pb-24">
-      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,rgba(244,213,36,0.24),transparent_28%),radial-gradient(circle_at_80%_15%,rgba(18,18,18,0.08),transparent_24%),linear-gradient(180deg,#fffef8_0%,#fff8d9_56%,#fffdf7_100%)]" />
-      <div className="absolute inset-x-0 top-0 -z-10 h-72 bg-[linear-gradient(180deg,rgba(255,255,255,0.88),transparent)]" />
+    <section className="relative min-h-screen">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/Images/DreambuildBanner.jpg"
+                alt="Dreambuild Design Studio"
+                width={180}
+                height={60}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            </Link>
 
-      <div className="mx-auto max-w-7xl">
-        <header className="mb-14 flex items-center justify-between rounded-full border border-yellow-200 bg-white/92 px-5 py-3 shadow-[0_10px_35px_rgba(18,18,18,0.08)] backdrop-blur-md">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/Images/DreambuildBanner.jpg"
-              alt="Dreambuild Design Studio"
-              width={240}
-              height={84}
-              className="h-10 w-auto rounded-md object-contain sm:h-11"
-              priority
-            />
-          </Link>
-          <nav className="hidden items-center gap-8 text-sm text-stone-600 md:flex">
-            {navigation.map((item) => (
+            {/* Desktop Navigation */}
+            <nav className="hidden items-center gap-8 md:flex">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-4">
               <Link
-                key={item.href}
-                href={item.href}
-                className="transition hover:text-black"
+                href="#contact"
+                className="hidden rounded-full bg-[var(--dark)] px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-[var(--dark-muted)] sm:inline-flex"
               >
-                {item.label}
+                Book Consult
               </Link>
-            ))}
-          </nav>
-          <Link
-            href="#contact"
-            className="rounded-full border border-black/10 bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--ink-soft)]"
-          >
-            Book Consult
-          </Link>
-        </header>
 
-        <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-          <div className="max-w-3xl">
-            <p className="inline-flex rounded-full border border-yellow-300 bg-[var(--brand-soft)] px-4 py-2 text-[0.72rem] font-medium tracking-[0.32em] text-black uppercase shadow-sm">
-              Hero Section • Interior Services
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] md:hidden"
+                aria-label="Toggle menu"
+              >
+                <div className="flex flex-col gap-1">
+                  <span className={`h-0.5 w-4 bg-[var(--foreground)] transition-all ${mobileMenuOpen ? "translate-y-1.5 rotate-45" : ""}`} />
+                  <span className={`h-0.5 w-4 bg-[var(--foreground)] transition-all ${mobileMenuOpen ? "opacity-0" : ""}`} />
+                  <span className={`h-0.5 w-4 bg-[var(--foreground)] transition-all ${mobileMenuOpen ? "-translate-y-1.5 -rotate-45" : ""}`} />
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="border-t border-[var(--border)] bg-[var(--background)] px-6 py-4 md:hidden">
+            <nav className="flex flex-col gap-3">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-2 text-sm text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 rounded-full bg-[var(--dark)] px-5 py-2.5 text-center text-sm font-medium text-white"
+              >
+                Book Consult
+              </Link>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Content */}
+      <div className="mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-8 lg:pt-40 lg:pb-32">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-20">
+          {/* Left Column */}
+          <div className="max-w-2xl">
+            <p className="inline-flex items-center rounded-full border border-[var(--border)] bg-white px-4 py-1.5 text-xs font-medium tracking-wide text-[var(--muted)] uppercase">
+              Interior Design Studio
             </p>
-            <h1 className="mt-6 text-5xl leading-none font-semibold tracking-[-0.06em] text-black text-balance sm:text-6xl lg:text-7xl">
-              Refined interior design for homes that want clarity and character.
+
+            <h1 className="mt-8 text-4xl font-medium leading-tight tracking-tight text-[var(--foreground)] text-balance sm:text-5xl lg:text-6xl">
+              Refined interiors for homes that seek clarity and character
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-stone-700 sm:text-lg">
-              Dreambuild creates calm, polished interiors through thoughtful
-              planning, clean material stories, and a modern design language
-              that feels elevated without becoming cold.
+
+            <p className="mt-6 text-lg leading-relaxed text-[var(--muted)]">
+              Dreambuild creates calm, polished interiors through thoughtful planning, 
+              clean material stories, and a modern design language that feels elevated 
+              without becoming cold.
             </p>
 
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
               <Link
                 href="#services"
-                className="inline-flex items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[var(--brand-deep)]"
+                className="inline-flex items-center justify-center rounded-full bg-[var(--dark)] px-6 py-3.5 text-sm font-medium text-white transition-all hover:bg-[var(--dark-muted)]"
               >
                 Explore Services
               </Link>
               <Link
                 href="/projects"
-                className="inline-flex items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-[var(--brand-soft)]"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--border)] bg-white px-6 py-3.5 text-sm font-medium text-[var(--foreground)] transition-all hover:border-[var(--foreground)]"
               >
-                View Interior Projects
+                View Projects
               </Link>
             </div>
 
-            <div className="mt-10 grid max-w-2xl gap-4 sm:grid-cols-3">
+            {/* Stats */}
+            <div className="mt-16 grid grid-cols-3 gap-8">
               {stats.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-[1.6rem] border border-yellow-200 bg-white p-5 shadow-[0_18px_45px_rgba(18,18,18,0.06)]"
-                >
-                  <div className="text-2xl font-semibold tracking-[-0.05em] text-black">
+                <div key={item.label}>
+                  <p className="text-3xl font-medium tracking-tight text-[var(--foreground)] lg:text-4xl">
                     {item.value}
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-stone-600">
+                  </p>
+                  <p className="mt-2 text-sm text-[var(--muted)]">
                     {item.label}
                   </p>
                 </div>
@@ -85,43 +137,40 @@ export function HeroSection() {
             </div>
           </div>
 
+          {/* Right Column - Visual */}
           <div className="relative">
-            <div className="absolute -left-6 top-14 h-32 w-32 rounded-full bg-[var(--brand-soft)] blur-3xl" />
-            <div className="absolute -right-4 bottom-8 h-28 w-28 rounded-full bg-yellow-200 blur-3xl" />
-
-            <div className="grid gap-4 sm:grid-cols-[1.05fr_0.95fr]">
-              <div className="flex flex-col gap-4">
-                <div className="overflow-hidden rounded-[2rem] border border-yellow-200 bg-white p-4 shadow-[0_24px_70px_rgba(18,18,18,0.08)]">
-                  <div className="h-[21rem] rounded-[1.5rem] bg-[linear-gradient(155deg,#121212_0%,#4e4e4e_18%,#f4d524_100%)]" />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-4">
+                <div className="overflow-hidden rounded-2xl bg-[#e8e3db]">
+                  <div className="aspect-[4/5] bg-gradient-to-br from-[#d4cdc3] via-[#c9bfb2] to-[#b8a99a]" />
                 </div>
-                <div className="rounded-[1.7rem] border border-yellow-300/35 bg-black p-5 text-white shadow-[0_20px_50px_rgba(18,18,18,0.2)]">
-                  <p className="text-[0.68rem] tracking-[0.28em] uppercase text-yellow-300">
-                    Interior Request
+                <div className="rounded-2xl bg-[var(--dark)] p-6 text-white">
+                  <p className="text-xs font-medium tracking-widest text-[var(--accent)] uppercase">
+                    Design Philosophy
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-stone-200">
-                    Elegant, clean, and presentation-ready layouts with a more
-                    modern studio tone and stronger visual hierarchy.
+                  <p className="mt-3 text-sm leading-relaxed text-neutral-300">
+                    Elegant, clean, and presentation-ready layouts with a modern studio tone.
                   </p>
                 </div>
               </div>
-
-              <div className="flex flex-col gap-4 pt-8 sm:pt-12">
-                <div className="overflow-hidden rounded-[2rem] border border-yellow-200 bg-white p-4 shadow-[0_24px_70px_rgba(18,18,18,0.08)]">
-                  <div className="h-52 rounded-[1.4rem] bg-[linear-gradient(160deg,#fff9d3_0%,#f4d524_52%,#121212_100%)]" />
+              <div className="space-y-4 pt-8 sm:pt-12">
+                <div className="overflow-hidden rounded-2xl bg-[#f0ebe3]">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-[#e6dfd5] via-[#d9cfc2] to-[#ccc0b0]" />
                 </div>
-                <div className="overflow-hidden rounded-[2rem] border border-yellow-200 bg-white p-4 shadow-[0_24px_70px_rgba(18,18,18,0.08)]">
-                  <div className="h-64 rounded-[1.4rem] bg-[linear-gradient(155deg,#fffef8_0%,#fff1a0_44%,#cab000_100%)]" />
+                <div className="overflow-hidden rounded-2xl bg-[#e2dbd1]">
+                  <div className="aspect-square bg-gradient-to-br from-[#d6cdc1] via-[#cbbfb1] to-[#bfb1a0]" />
                 </div>
               </div>
             </div>
 
-            <div className="absolute -left-3 bottom-10 max-w-[16rem] rounded-[1.6rem] border border-yellow-200 bg-white p-5 shadow-[0_22px_60px_rgba(18,18,18,0.08)]">
-              <p className="text-[0.68rem] tracking-[0.28em] uppercase text-stone-500">
-                Signature Theme
+            {/* Floating Card */}
+            <div className="absolute -left-4 bottom-16 max-w-[200px] rounded-xl border border-[var(--border)] bg-white p-4 shadow-lg sm:bottom-24 sm:max-w-[220px]">
+              <p className="text-xs font-medium tracking-widest text-[var(--muted)] uppercase">
+                Signature Style
               </p>
-              <h2 className="mt-3 text-xl font-semibold tracking-[-0.04em] text-black">
-                Dreambuild yellow, charcoal contrast, and cleaner modern polish
-              </h2>
+              <p className="mt-2 text-sm font-medium text-[var(--foreground)]">
+                Warm neutrals with refined, modern polish
+              </p>
             </div>
           </div>
         </div>
