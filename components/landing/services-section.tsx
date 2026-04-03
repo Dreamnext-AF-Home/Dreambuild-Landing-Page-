@@ -1,79 +1,76 @@
+"use client";
+
 import { services } from "@/lib/landing-data";
+import { FadeUp, ScaleUp, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="px-6 py-[4.5rem] sm:px-10 lg:px-14 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col gap-5 border-t border-stone-300/80 pt-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-[0.72rem] font-medium tracking-[0.32em] text-stone-500 uppercase">
-              Interior Services
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-stone-950 sm:text-4xl lg:text-5xl">
-              Built like a studio presentation, not a basic services grid.
-            </h2>
-          </div>
-          <p className="max-w-xl text-sm leading-7 text-stone-600 sm:text-base">
-            This section keeps the calm luxury tone from your reference but
-            adds more structure, contrast, and visual storytelling so the page
-            feels more premium and modern.
+    <section id="services" className="py-20 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Section Header */}
+        <FadeUp className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-medium tracking-widest text-[var(--muted)] uppercase">
+            Interior Services
           </p>
-        </div>
+          <h2 className="mt-4 text-3xl font-medium tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
+            Comprehensive design services tailored to your vision
+          </h2>
+          <p className="mt-6 text-base leading-relaxed text-[var(--muted)]">
+            From full interior design to styling and finishing touches, we offer 
+            services that transform your space into something extraordinary.
+          </p>
+        </FadeUp>
 
-        <div className="space-y-6">
+        {/* Services Cards */}
+        <StaggerContainer className="mt-16 space-y-6 lg:mt-20" staggerDelay={0.15}>
           {services.map((service, index) => (
-            <article
-              key={service.id}
-              className="grid gap-6 rounded-[2rem] border border-stone-200/80 bg-white/80 p-5 shadow-[0_24px_70px_rgba(65,41,25,0.07)] backdrop-blur-sm lg:grid-cols-[1.02fr_0.98fr] lg:p-6"
-            >
-              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div
-                  className={`relative h-full min-h-[20rem] overflow-hidden rounded-[1.7rem] bg-gradient-to-br ${service.accent} p-5`}
-                >
-                  <div
-                    className={`absolute inset-x-5 top-5 h-[58%] rounded-[1.5rem] bg-gradient-to-br ${service.panel}`}
-                  />
-                  <div className="absolute right-5 bottom-5 h-24 w-24 rounded-[1.4rem] border border-white/50 bg-white/30 backdrop-blur-sm" />
-                  <div className="absolute left-5 bottom-5 w-[58%] rounded-[1.4rem] border border-white/50 bg-white/55 p-4 backdrop-blur-sm">
-                    <p className="text-[0.68rem] tracking-[0.28em] uppercase text-stone-600">
-                      Visual Direction
+            <StaggerItem key={service.id}>
+              <article className="group overflow-hidden rounded-2xl border border-[var(--border)] bg-white transition-all hover:shadow-lg">
+                <div className={`grid gap-0 lg:grid-cols-2 ${index % 2 === 1 ? "lg:grid-flow-dense" : ""}`}>
+                  {/* Visual Side */}
+                  <div className={`relative min-h-[300px] bg-gradient-to-br ${service.accent} p-6 lg:min-h-[400px] lg:p-8 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
+                    <div className="absolute inset-6 lg:inset-8">
+                      <div className={`h-3/5 rounded-xl bg-gradient-to-br ${service.panel} opacity-80 transition-transform duration-500 group-hover:scale-105`} />
+                      <div className="absolute right-0 bottom-0 w-2/3 rounded-xl border border-white/40 bg-white/60 p-4 backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-[-4px]">
+                        <p className="text-xs font-medium tracking-widest text-[var(--muted)] uppercase">
+                          Visual Direction
+                        </p>
+                        <p className="mt-2 text-sm text-[var(--foreground)]">
+                          Clean forms, layered neutrals, and warm material depth.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Side */}
+                  <div className={`flex flex-col justify-center p-8 lg:p-12 ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
+                    <p className="text-xs font-medium tracking-widest text-[var(--accent)] uppercase">
+                      {service.id}
                     </p>
-                    <p className="mt-2 text-sm leading-6 text-stone-700">
-                      Clean forms, layered neutrals, and warm material depth.
+                    <h3 className="mt-4 text-2xl font-medium tracking-tight text-[var(--foreground)] sm:text-3xl">
+                      {service.title}
+                    </h3>
+                    <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">
+                      {service.description}
                     </p>
+
+                    <div className="mt-8 space-y-3">
+                      {service.bullets.map((bullet) => (
+                        <div
+                          key={bullet}
+                          className="flex items-start gap-3"
+                        >
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                          <p className="text-sm text-[var(--muted)]">{bullet}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div
-                className={`flex flex-col justify-between rounded-[1.7rem] bg-[#fcfaf7] p-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}
-              >
-                <div>
-                  <p className="text-sm tracking-[0.32em] text-stone-400 uppercase">
-                    {service.id}
-                  </p>
-                  <h3 className="mt-5 text-2xl font-semibold tracking-[-0.04em] text-stone-950 sm:text-3xl">
-                    {service.title}
-                  </h3>
-                  <p className="mt-5 max-w-xl text-sm leading-7 text-stone-600 sm:text-base">
-                    {service.description}
-                  </p>
-                </div>
-
-                <div className="mt-8 grid gap-3">
-                  {service.bullets.map((bullet) => (
-                    <div
-                      key={bullet}
-                      className="rounded-2xl border border-stone-200 bg-white px-4 py-4 text-sm leading-6 text-stone-700"
-                    >
-                      {bullet}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </article>
+              </article>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
