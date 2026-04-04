@@ -8,11 +8,13 @@ import { FadeUp, FadeIn, SlideInLeft, SlideInRight, StaggerContainer, StaggerIte
 export default function BlogsPage() {
   const featuredPost = blogPosts[0];
   const otherPosts = blogPosts.slice(1);
+  console.log("Rendering BlogsPage with featured post:", featuredPost);
+  console.log("Other posts:", otherPosts);
 
   return (
     <main className="min-h-screen bg-[var(--background)]">
       <Header />
-
+      
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
